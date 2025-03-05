@@ -1,14 +1,16 @@
+import Image from "next/image";
+
 export default function NotFound() {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-200 text-center px-4">
-      <div className="bg-gray-100 border border-gray-100 rounded-2xl shadow-lg p-8 md:p-12 max-w-lg w-full sm:w-3/4 lg:w-1/2">
-        <h1 className="text-6xl md:text-7xl font-bold text-red-600">404</h1>
-        <p className="text-2xl md:text-3xl mt-6 font-bold">Link/Página não encontrada</p>
-        <p className="mt-6  hover:underline text-lg md:text-sm block">
-          O link que você está tentando acessar não existe, foi removido ou é uma URL inválida. Saiba mais em brev.ly.
+  return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-200 px-4">
+      <div className="bg-gray-100 border border-gray-300 rounded-2xl shadow-lg p-8 md:p-12 max-w-lg w-full sm:w-3/4 lg:w-1/2 flex flex-col items-center text-center">
+        <Image src="/images/404.svg" alt="Ícone not found" width={180} height={240} className="mx-auto" />
+        <p className="text-1xl md:text-2xl mt-6 font-bold">Link/Página não encontrada</p>
+        <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-md">
+          O link que você está tentando acessar não existe, foi removido ou é uma URL inválida. Saiba mais em <a href="https://brev.ly" className="text-blue-500 hover:underline">brev.ly</a>.
         </p>
       </div>
     </div>    
-    );
-  }
+  );
+}
   
