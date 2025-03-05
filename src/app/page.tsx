@@ -1,17 +1,19 @@
 import ThemeToggle from "@/components/ThemeToggle";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       {/* Título */}
-      {/* <div className="font-bold text-2xl md:text-3xl text-center my-6">
-        Título
-      </div> */}
+      <div className="font-bold text-2xl md:text-3xl my-6 text-left pl-4">
+        <Image src="icons/Logo.svg" width={120} height={120} alt="CV" />
+      </div>
 
       <div className="flex flex-col lg:flex-row items-start justify-center space-y-8 lg:space-y-0 space-x-0 lg:space-x-4 px-4 w-full">
+        
         {/* Card da Esquerda */}
         <div className="bg-gray-100 border border-gray-100 rounded-2xl shadow-lg p-6 md:p-10 max-w-lg w-full sm:w-3/4 lg:w-1/2 flex flex-col items-center text-center">
-          <p className="text-xl md:text-xl font-bold">Novo Link</p>
+          <p className="text-xl md:text-xl font-bold text-black">Novo Link</p>
 
           {/* Primeiro Input */}
           <div className="w-full text-left mt-4">
@@ -48,13 +50,14 @@ export default function Home() {
         </div>
 
         {/* Card da Direita */}
-        <div className="bg-gray-100 border border-gray-300 rounded-2xl shadow-lg p-8 md:p-12 w-full sm:w-3/4 lg:w-1/3 flex flex-col items-center text-center">
+        <div className="bg-gray-100 border border-gray-300 rounded-2xl shadow-lg px-6 py-8 md:p-12 w-full sm:w-3/4 lg:w-1/3 flex flex-col items-center text-center">
           {/* Título com o botão ao lado */}
           <div className="flex justify-between items-center w-full">
-            <p className="text-xl md:text-xl font-bold">Meus Links</p>
+            <p className="text-xl md:text-xl font-bold text-black">Meus Links</p>
             <button
-              className="px-3 py-2 font-medium rounded-md bg-[#CDCFD5] hover:bg-[#74798B] cursor-pointer"
+              className="flex gap-2 px-3 py-2 font-medium rounded-md bg-[#CDCFD5] hover:bg-[#74798B] cursor-pointer text-black"
             >
+              <Image src="icons/Vector.svg" width={16} height={20} alt="CV" />
               Baixar CSV
             </button>
           </div>
