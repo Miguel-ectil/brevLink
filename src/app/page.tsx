@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
-import axios from "axios";  
+import axios from "axios";
 import Image from "next/image";
 
 export default function Home() {
@@ -27,7 +27,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col lg:flex-row items-start justify-center space-y-8 lg:space-y-0 space-x-0 lg:space-x-4 px-4 w-full">
-        
+
         {/* Card da Esquerda */}
         <div className="bg-gray-100 border border-gray-100 rounded-2xl shadow-lg p-6 md:p-10 max-w-lg w-full sm:w-3/4 lg:w-1/2 flex flex-col items-center text-center">
           <p className="text-xl md:text-xl font-bold text-black">Novo Link</p>
@@ -82,50 +82,52 @@ export default function Home() {
           {/* Linha separadora */}
           <div className="w-full border-t border-gray-300 my-4"></div>
 
-          <div className="w-full overflow-x-auto">
-        <table className="">
-          {/* <thead>
+          <div className="">
+            <table>
+              {/* <thead>
             <tr>
               <th className="p-4 text-left">Links</th>
               <th className="p-4 text-left">Acessos</th>
               <th className="p-4 text-left">Ações</th>
             </tr>
           </thead> */}
-          <tbody>
-            {linksData.length === 0 ? (
-              <tr>
-                <td colSpan={3} className="text-gray-500">
-                  <div className="flex items-center justify-center mb-4 ">
-                    <Image src="icons/Link.svg" width={42} height={20} alt="CV" className="text-gray-400" />
-                  </div>
-                    AINDA NÃO EXISTE LINKS CADASTRADOS.
-                </td>
-              </tr>
-            ) : (
-              linksData.map((link) => (
-                <tr key={link.id}>
-                  <td className="p-4 text-gray-600">{link.url}</td>
-                  <td className="p-4 text-gray-600">{link.acessos}</td>
-                  <td className="p-4">
-                    <button
-                      className="mr-2 px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-                      onClick={() => alert(`Editando ${link.url}`)}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
-                      onClick={() => alert(`Excluindo ${link.url}`)}
-                    >
-                      Excluir
-                    </button>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+              <tbody>
+                {linksData.length === 0 ? (
+                  <tr className="w-full ">
+                    <td colSpan={3} className="flex flex-col items-center justify-center text-gray-500">
+                      <div className="mb-4">
+                        <Image src="icons/Link.svg" width={42} height={20} alt="CV" className="text-gray-400" />
+                      </div>
+                      <p>
+                        AINDA NÃO EXISTE LINKS CADASTRADOS.
+                      </p>
+                    </td>
+                  </tr>
+                ) : (
+                  linksData.map((link) => (
+                    <tr key={link.id}>
+                      <td className="p-4 text-gray-600">{link.url}</td>
+                      <td className="p-4 text-gray-600">{link.acessos}</td>
+                      <td className="flex p-4">
+                        <button
+                          className="mr-2 p-2 text-white bg-[#CDCFD5] rounded-md hover:bg-[#74798B]"
+                          onClick={() => alert(`Editando ${link.url}`)}
+                        >
+                          <Image src="icons/Copy.svg" width={22} height={20} alt="CV" className="text-gray-400" />
+                        </button>
+                        <button
+                          className="p-2 text-white bg-[#CDCFD5] rounded-md hover:bg-[#74798B]"
+                          onClick={() => alert(`Excluindo ${link.url}`)}
+                        >
+                          <Image src="icons/Trash.svg" width={22} height={20} alt="CV" className="text-gray-400" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <ThemeToggle />
