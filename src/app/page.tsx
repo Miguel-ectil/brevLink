@@ -1,7 +1,24 @@
+"use client"
+import { useEffect, useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
+import axios from "axios";  
 import Image from "next/image";
 
 export default function Home() {
+  const [linksData, setLinksData] = useState([]);
+
+  useEffect(() => {
+    const fetchLinks = async () => {
+      try {
+        const response = await axios.get("https://api.exemplo.com/links"); // Substitua pela URL da sua API
+        setLinksData(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar os dados da API", error);
+      }
+    };
+
+    fetchLinks();
+  }, []);
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       {/* Título */}
@@ -65,16 +82,52 @@ export default function Home() {
           {/* Linha separadora */}
           <div className="w-full border-t border-gray-300 my-4"></div>
 
-          {/* Lista de Links */}
-          <ul className="w-full space-y-2">
-            <li className="text-gray-600">Link 1: www.exemplo1.com</li>
-            <li className="text-gray-600">Link 2: www.exemplo2.com</li>
-            <li className="text-gray-600">Link 3: www.exemplo3.com</li>
-          </ul>
-         
+          <div className="w-full overflow-x-auto">
+        <table className="">
+          {/* <thead>
+            <tr>
+              <th className="p-4 text-left">Links</th>
+              <th className="p-4 text-left">Acessos</th>
+              <th className="p-4 text-left">Ações</th>
+            </tr>
+          </thead> */}
+          <tbody>
+            {linksData.length === 0 ? (
+              <tr>
+                <td colSpan={3} className="text-gray-500">
+                  <div className="flex items-center justify-center mb-4 ">
+                    <Image src="icons/Link.svg" width={42} height={20} alt="CV" className="text-gray-400" />
+                  </div>
+                    AINDA NÃO EXISTE LINKS CADASTRADOS.
+                </td>
+              </tr>
+            ) : (
+              linksData.map((link) => (
+                <tr key={link.id}>
+                  <td className="p-4 text-gray-600">{link.url}</td>
+                  <td className="p-4 text-gray-600">{link.acessos}</td>
+                  <td className="p-4">
+                    <button
+                      className="mr-2 px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                      onClick={() => alert(`Editando ${link.url}`)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
+                      onClick={() => alert(`Excluindo ${link.url}`)}
+                    >
+                      Excluir
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
         </div>
       </div>
-      {/* Toggle de Tema */}
       <ThemeToggle />
     </div>
   );
