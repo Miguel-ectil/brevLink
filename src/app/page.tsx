@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center space-x-4 px-4">
       <div className="bg-gray-100 border border-gray-300 rounded-2xl shadow-lg p-6 md:p-10 max-w-lg w-full sm:w-3/4 lg:w-1/2 flex flex-col items-center text-center">
-        <p className="text-xl md:text-2xl mt-6 font-bold">Novo Link</p>
+        <p className="text-xl md:text-2xl font-bold">Novo Link</p>
     
         {/* Primeiro Input */}
         <div className="w-full text-left mt-4">
