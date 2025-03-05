@@ -53,9 +53,9 @@ export default function Home() {
           <div className="flex justify-between items-center w-full">
             <p className="text-xl md:text-xl font-bold">Meus Links</p>
             <button
-              className="p-3 text-white font-medium rounded-md bg-[#CDCFD5] hover:bg-[#E4E6EC] cursor-pointer"
+              className="px-3 py-2 font-medium rounded-md bg-[#CDCFD5] hover:bg-[#74798B] cursor-pointer"
             >
-              Baixare CSV
+              Baixar CSV
             </button>
           </div>
 
@@ -68,13 +68,7 @@ export default function Home() {
             <li className="text-gray-600">Link 2: www.exemplo2.com</li>
             <li className="text-gray-600">Link 3: www.exemplo3.com</li>
           </ul>
-
-          {/* Botão de Salvar link */}
-          <button
-            className="w-full mt-6 p-3 text-white font-medium rounded-md bg-[#CDCFD5] hover:bg-[#E4E6EC] cursor-pointer"
-          >
-            Salvar link
-          </button>
+         
         </div>
       </div>
       {/* Toggle de Tema */}
