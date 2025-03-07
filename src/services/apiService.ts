@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "./tokenService";
+import Cookies from "js-cookie"; 
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -22,11 +22,13 @@ const api = axios.create({
 // );
 
 // Exemplo de uma função para fazer uma requisição
-export const getLinks = async () => {
+
+export const getLinks = async (userId: string) => {
   try {
-    const response = await api.get("/links?id=c292c8d1-1ab1-4bd4-af31-278bab477462");
+    const response = await api.get(`/links?id=${userId}`); // Passa o ID na requisição
     return response.data;
   } catch (error) {
+    console.error("Erro ao buscar links:", error);
     throw new Error("Erro ao buscar links");
   }
 };

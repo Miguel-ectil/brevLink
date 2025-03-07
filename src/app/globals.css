@@ -8,7 +8,7 @@
 
 /* Modo escuro */
 .dark {
-  --background: black;
+  --background: #000002d5;
   --foreground: white;
 }
 
