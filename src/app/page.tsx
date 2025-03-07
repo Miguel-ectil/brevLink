@@ -23,8 +23,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchLinks = async () => {
-      // const userId = Cookies.get("userId");
-      const userId = 'c292c8d1-1ab1-4bd4-af31-278bab477462'; // Obtém o ID do cookie
+      const userId = Cookies.get("userId");
       if (!userId) {
         setErrorMessage("ID não encontrado no cookie");
         return;
@@ -42,7 +41,7 @@ export default function Home() {
   }, []);
 
   const handleCreateLink = async () => {
-    const userId = "c292c8d1-1ab1-4bd4-af31-278bab477462";
+    const userId = Cookies.get("userId");
     if (!userId) {
       setErrorMessage("ID não encontrado no cookie");
       return;
@@ -75,11 +74,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {errorMessage && (
+      {/* {errorMessage && (
         <div className="text-red-500 text-center my-4">
           <p>{errorMessage}</p>
         </div>
-      )}
+      )} */}
 
       <div className="flex flex-col items-center w-full mt-12 md:mt-20 lg:mt-24">
         <div className="mb-6">
