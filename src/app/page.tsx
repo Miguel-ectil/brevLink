@@ -18,6 +18,8 @@ export default function Home() {
   const [originalUrl, setOriginalUrl] = useState("");
   const [customAlias, setCustomAlias] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<{ originalUrl?: string; customAlias?: string }>({});
+
 
   useEffect(() => {
     const fetchLinks = async () => {
@@ -40,34 +42,35 @@ export default function Home() {
   }, []);
 
   const handleCreateLink = async () => {
-    // const userId = Cookies.get("userId");
-    const userId = 'c292c8d1-1ab1-4bd4-af31-278bab477462'; // Obtém o ID do cookie
-
+    const userId = "c292c8d1-1ab1-4bd4-af31-278bab477462";
     if (!userId) {
       setErrorMessage("ID não encontrado no cookie");
       return;
     }
 
-    if (!originalUrl || !customAlias) {
-      alert("Preencha todos os campos!");
-      return;
-    }
+    // Validação dos campos
+    const newErrors: { originalUrl?: string; customAlias?: string } = {};
+    if (!originalUrl) newErrors.originalUrl = "O campo Link Original é obrigatório.";
+    if (!customAlias) newErrors.customAlias = "O campo Link Encurtado é obrigatório.";
+    
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) return; // Se houver erros, interrompe a execução
 
     try {
       setLoading(true);
       const newLink = await createLink(originalUrl, customAlias, userId);
-    
       const formattedLink = { ...newLink, id: Number(newLink.id) };
-    
+
       setLinksData((prev) => [formattedLink, ...prev]);
       setOriginalUrl("");
       setCustomAlias("");
+      setErrors({});
     } catch (error) {
       console.error("Erro ao criar link:", error);
     } finally {
       setLoading(false);
     }
-    
   };
 
   return (
@@ -87,8 +90,12 @@ export default function Home() {
           <div className="bg-gray-100 border border-gray-100 rounded-2xl shadow-lg p-6 md:p-10 max-w-lg w-full sm:w-3/4 lg:w-1/2 flex flex-col items-center text-center">
             <p className="text-xl md:text-xl font-bold text-black">Novo Link</p>
 
+            {/* Campo LINK ORIGINAL */}
             <div className="w-full text-left mt-4">
-              <label className="block text-gray-500 font-small mb-2" htmlFor="originalUrl">
+              <label
+                className={`block font-small mb-2 ${errors.originalUrl ? "text-red-500" : "text-gray-500"}`}
+                htmlFor="originalUrl"
+              >
                 LINK ORIGINAL
               </label>
               <input
@@ -97,30 +104,32 @@ export default function Home() {
                 value={originalUrl}
                 onChange={(e) => setOriginalUrl(e.target.value)}
                 placeholder="www.exemplo.com.br"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 ${
+                  errors.originalUrl ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-gray-200"
+                }`}
               />
+              {errors.originalUrl && <p className="flex gap-x-1 text-red-500 text-sm mt-1"><Image src="icons/Warning.svg" width={20} height={20} alt="CV" /> <p className="mt-1">{errors.originalUrl}</p></p>}
             </div>
 
+            {/* Campo LINK ENCURTADO */}
             <div className="w-full text-left mt-4">
-              <label className="block text-gray-500 font-small mb-2" htmlFor="customAlias">
+              <label
+                className={`block font-small mb-2 ${errors.customAlias ? "text-red-500" : "text-gray-500"}`}
+                htmlFor="customAlias"
+              >
                 LINK ENCURTADO
               </label>
-              <div className="flex items-center">
               <input
                 type="text"
                 id="customAlias"
                 value={customAlias}
-                onChange={(e) => {
-                  let value = e.target.value;
-
-                  setCustomAlias(value);
-                }}
+                onChange={(e) => setCustomAlias(e.target.value)}
                 placeholder="brev.ly/"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                className={`w-full p-3 border rounded-md focus:outline-none focus:ring-2 ${
+                  errors.customAlias ? "border-red-500 focus:ring-red-300" : "border-gray-300 focus:ring-gray-200"
+                }`}
               />
-            </div>
-
-
+              {errors.customAlias && <p className="flex gap-x-1 text-red-500 text-sm mt-1"><Image src="icons/Warning.svg" width={20} height={20} alt="CV" /> <p className="mt-1">{errors.customAlias}</p></p>}
             </div>
 
             <button
